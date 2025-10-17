@@ -1,14 +1,10 @@
 'use client'
 import React, { useRef } from 'react';
 import Image from 'next/image';
-import html2pdf from 'html2pdf.js';
 import PartneLogos from '@/components/PartneLogos';
 
 
 const InvestPitchLong = () => {
-  const contentRef = useRef(null);
-
-
   return (
     <div className="bg-white">
       <div className="container mx-auto max-w-3xl px-4 py-10">
