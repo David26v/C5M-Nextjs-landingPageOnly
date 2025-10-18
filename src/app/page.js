@@ -1,5 +1,6 @@
 'use client'
 import Footer from '@/components/Footer';
+import Globe3D from '@/components/Globe3D';
 import Image from 'next/image';
 import { useEffect } from 'react';
 
@@ -109,16 +110,19 @@ export default function Home() {
             }}
           >
             <div 
-              className="center-content w-[700px] h-[700px] max-w-[90vw] max-h-[90vw] rounded-full flex flex-col items-center justify-center text-white text-center p-[35px] box-border transition-transform duration-300"
+              className="center-content w-[700px] h-[700px] max-w-[90vw] max-h-[90vw] rounded-full flex flex-col items-center justify-center text-white text-center p-[35px] box-border transition-transform duration-300 relative"
               style={{
-                backgroundImage: "radial-gradient(circle at 30% 30%, rgba(255,255,255,0.15), rgba(0,0,0,0.3)), url('https://kurtzy.s3.ap-southeast-2.amazonaws.com/static/images/c5mbg.png')",
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
                 boxShadow: 'inset -20px -20px 50px rgba(13, 0, 129, 0.4), inset 20px 20px 50px rgba(7, 0, 109, 0.43), 0 10px 30px rgb(255, 255, 255)'
               }}
             >
-              <div>
-                <h3 className="welcome-text mb-5 text-black font-bold text-[clamp(1.8rem,4vw,3rem)]">
+              {/* 3D GLOBE */}
+              <div className="absolute inset-0 rounded-full overflow-hidden z-0">
+                <Globe3D />
+              </div>
+
+              {/* CONTENT OVERLAY */}
+              <div className="relative z-10">
+              <h3 className="welcome-text mb-5 text-white font-bold text-[clamp(1.8rem,4vw,3rem)]">
                   WELCOME TO
                 </h3>
                 <img 
@@ -126,7 +130,7 @@ export default function Home() {
                   alt="c5m" 
                   className="responsive-img max-w-full h-auto block mx-auto"
                 />
-                <p className="text-black text-xl mt-4 px-0 md:px-[35px] text-[clamp(1rem,2.5vw,1.25rem)]">
+               <p className="text-white text-xl mt-4 px-0 md:px-[35px] text-[clamp(1rem,2.5vw,1.25rem)]">
                   Your digital world of entertainment, rewards, retail innovation, and marketplace opportunities.
                 </p>
               </div>

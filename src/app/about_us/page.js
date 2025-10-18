@@ -1,10 +1,11 @@
 'use client';
 
+import PartneLogos from '@/components/PartneLogos';
 import React from 'react';
 
 const AboutUsContent = () => {
   return (
-    <div className="w-full bg-white pt-7">
+    <div className="w-full bg-white pt-10 pb-5">
       <div className="container mx-auto px-4">
         {/* Main Logo */}
         <div className="mb-10 flex justify-center">
@@ -23,37 +24,8 @@ const AboutUsContent = () => {
         </div>
 
         {/* Partner / Brand Logos Grid */}
-        <div className="mb-8 flex flex-wrap justify-center gap-6">
-          {[
-            'ir.png',
-            'd2p_3.png',
-            'galaxy.png',
-            'galaxie.png',
-            'newtitan.png',
-            'gallerylgo.png',
-            'eMoneyGold.png',
-          ].map((filename, index) => (
-            <img
-              key={index}
-              src={`https://kurtzy.s3.ap-southeast-2.amazonaws.com/static/images/${filename}`}
-              alt=""
-              className="h-auto w-32"
-            />
-          ))}
-        </div>
-
-        {/* Additional Logos (eksplode + greengenie) */}
-        <div className="flex flex-col items-center gap-4">
-          <img
-            src="https://kurtzy.s3.ap-southeast-2.amazonaws.com/static/images/eksplode.png"
-            alt="eksplode"
-            className="h-12"
-          />
-          <img
-            src="https://kurtzy.s3.ap-southeast-2.amazonaws.com/static/images/greengenie.png"
-            alt="greengenie"
-            className="h-12"
-          />
+        <div className="mb-9 flex flex-col  space-y-5">
+          <PartneLogos/>
         </div>
       </div>
     </div>
