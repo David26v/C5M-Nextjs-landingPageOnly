@@ -12,8 +12,8 @@ const PrivacyPolicy = () => {
             <div className="col-lg-8 mx-auto">
               <div className="text-center mb-8">
                 <img
-                  src="https://kurtzy.s3.ap-southeast-2.amazonaws.com/static/images/c5mnewlogo.png"
-                  alt="Terms Banner"
+                  src="/brandings/c5m-logo-center-bg-remove.png"
+                  alt="C5M "
                   className="img-fluid mb-4 rounded"
                 />
                 <h1 className="mb-2 text-3xl font-bold">PRIVACY POLICY</h1>
@@ -213,7 +213,7 @@ const PrivacyPolicy = () => {
                 </a>{' '}
                 or{' '}
                 <a href="mailto:Admin@C5M.world" className="text-blue-600 hover:underline">
-                  Admin@C5M.world
+                  Info@c5m.world
                 </a>.
               </p>
             </div>

@@ -1,6 +1,7 @@
 'use client'
 import Footer from '@/components/Footer';
 import Globe3D from '@/components/Globe3D';
+import StarsCanvas from '@/components/NebulaBackground';
 import Image from 'next/image';
 import { useEffect } from 'react';
 
@@ -103,12 +104,8 @@ export default function Home() {
           <div 
             className="bg-info min-h-screen w-full flex items-center justify-center text-center relative overflow-hidden" 
             id="home"
-            style={{
-              backgroundImage: "url('https://kurtzy.s3.ap-southeast-2.amazonaws.com/static/images/sidestar.svg')",
-              backgroundSize: 'cover',
-              backgroundPosition: 'center'
-            }}
           >
+            <StarsCanvas/>
             <div 
               className="center-content w-[700px] h-[700px] max-w-[90vw] max-h-[90vw] rounded-full flex flex-col items-center justify-center text-white text-center p-[35px] box-border transition-transform duration-300 relative"
               style={{
@@ -122,16 +119,24 @@ export default function Home() {
 
               {/* CONTENT OVERLAY */}
               <div className="relative z-10">
-              <h3 className="welcome-text mb-5 text-white font-bold text-[clamp(1.8rem,4vw,3rem)]">
+                <h3 className="welcome-text mb-5 text-white font-bold text-[clamp(1.8rem,4vw,3rem)]">
                   WELCOME TO
                 </h3>
                 <img 
-                  src="https://kurtzy.s3.ap-southeast-2.amazonaws.com/static/images/c5mnewlogo.png" 
-                  alt="c5m" 
+                  src="/brandings/c5m-logo-center-bg-remove.png" 
+                  alt="C5M" 
                   className="responsive-img max-w-full h-auto block mx-auto"
                 />
-               <p className="text-white text-xl mt-4 px-0 md:px-[35px] text-[clamp(1rem,2.5vw,1.25rem)]">
-                  Your digital world of entertainment, rewards, retail innovation, and marketplace opportunities.
+                <p 
+                  className="text-white mt-7 text-[clamp(1rem,2.5vw,1.25rem)]"
+                  style={{
+                    maxWidth: '75%',
+                    margin: '0 auto',
+                    textAlign: 'center',
+                  }}
+                >
+                  Your digital world of entertainment, rewards, retail<br />
+                  innovation, and marketplace opportunities
                 </p>
               </div>
             </div>

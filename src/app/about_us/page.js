@@ -10,7 +10,7 @@ const AboutUsContent = () => {
         {/* Main Logo */}
         <div className="mb-10 flex justify-center">
           <img
-            src="https://kurtzy.s3.ap-southeast-2.amazonaws.com/static/images/c5mnewlogo.png"
+            src="/brandings/c5m-logo-center-bg-remove.png"
             alt="C5M"
             className="h-auto w-48"
           />

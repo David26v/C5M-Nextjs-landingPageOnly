@@ -11,8 +11,8 @@ const InvestPitchLong = () => {
         {/* Logo */}
         <div className="text-center mb-6">
           <Image
-            src="https://kurtzy.s3.ap-southeast-2.amazonaws.com/static/images/c5m-dark.png"
-            alt="C5M"
+                  src="/brandings/c5m-logo-center-bg-remove.png"
+                  alt="C5M"
             width={200}
             height={80}
             className="mx-auto"

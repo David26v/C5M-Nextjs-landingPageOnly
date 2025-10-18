@@ -19,7 +19,7 @@ export default function InvestContent() {
         {/* Main Logo */}
         <div className="mb-8 flex justify-center">
           <Image
-            src="https://kurtzy.s3.ap-southeast-2.amazonaws.com/static/images/c5mnewlogo.png"
+            src="/brandings/c5m-logo-center-bg-remove.png"
             alt="C5M"
             width={200}
             height={200}

@@ -11,7 +11,7 @@ const TermsOfUse = () => {
             <div className="col-lg-8 mx-auto">
               <div className="text-center mb-8">
                 <img
-                  src="https://kurtzy.s3.ap-southeast-2.amazonaws.com/static/images/c5mnewlogo.png"
+                  src="/brandings/c5m-logo-center-bg-remove.png"
                   alt="Terms Banner"
                   className="img-fluid mb-4 rounded"
                 />

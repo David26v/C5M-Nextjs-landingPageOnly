@@ -9,8 +9,8 @@ const SafeContract = () => {
         {/* Logo */}
         <div className="text-center mb-8">
           <img
-            src="https://kurtzy.s3.ap-southeast-2.amazonaws.com/static/images/c5m-dark.png"
-            alt="C5M"
+                  src="/brandings/c5m-logo-center-bg-remove.png"
+                  alt="C5M"
             className="mx-auto h-16 w-auto"
           />
         </div>
