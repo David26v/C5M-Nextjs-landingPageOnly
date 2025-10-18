@@ -109,7 +109,8 @@ export default function Home() {
             <div 
               className="center-content w-[700px] h-[700px] max-w-[90vw] max-h-[90vw] rounded-full flex flex-col items-center justify-center text-white text-center p-[35px] box-border transition-transform duration-300 relative bg-black" 
               style={{
-                boxShadow: 'inset -20px -20px 50px rgba(13, 0, 129, 0.4), inset 20px 20px 50px rgba(7, 0, 109, 0.43), 0 10px 30px rgb(255, 255, 255)'
+                boxShadow: 'inset -20px -20px 50px rgba(13, 0, 129, 0.4), inset 20px 20px 50px rgba(7, 0, 109, 0.43), 0 10px 30px rgb(255, 255, 255)',
+                backgroundColor: '#000000'
               }}
             >
               {/* 3D GLOBE */}

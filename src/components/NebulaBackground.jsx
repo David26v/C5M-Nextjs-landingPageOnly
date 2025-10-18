@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useState, useRef, Suspense } from "react";
+import React, { useState, useRef, Suspense, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Points, PointMaterial, Preload } from "@react-three/drei";
-// @ts-ignore
 import * as random from "maath/random/dist/maath-random.esm";
 
 const StarBackground = (props) => {
@@ -35,14 +34,36 @@ const StarBackground = (props) => {
 };
 
 const StarsCanvas = () => {
-  // ✅ Modern WebGL support check
-  if (typeof window !== "undefined") {
-    const canvas = document.createElement("canvas");
-    const gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
-    if (!gl) {
-      console.warn("WebGL is not supported on this device/browser.");
-      return null;
+  const [isClient, setIsClient] = useState(false);
+  const [webglSupported, setWebglSupported] = useState(true);
+
+  useEffect(() => {
+    // Only run on client side
+    setIsClient(true);
+
+    // Check WebGL support
+    try {
+      const canvas = document.createElement("canvas");
+      const gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+      
+      if (!gl) {
+        console.warn("WebGL is not supported on this device/browser.");
+        setWebglSupported(false);
+      }
+    } catch (error) {
+      console.error("WebGL check failed:", error);
+      setWebglSupported(false);
     }
+  }, []);
+
+  // Don't render anything during SSR
+  if (!isClient) {
+    return <div className="absolute inset-0 -z-10 pointer-events-none" />;
+  }
+
+  // Return empty div if WebGL not supported
+  if (!webglSupported) {
+    return <div className="absolute inset-0 -z-10 pointer-events-none" />;
   }
 
   return (
@@ -53,6 +74,15 @@ const StarsCanvas = () => {
       <Canvas
         camera={{ position: [0, 0, 1] }}
         dpr={[1, 1.5]}
+        gl={{
+          antialias: false,
+          alpha: true,
+          powerPreference: "high-performance",
+          failIfMajorPerformanceCaveat: false,
+        }}
+        onCreated={({ gl }) => {
+          gl.setClearColor(0x000000, 0);
+        }}
         style={{ background: "transparent" }}
       >
         <Suspense fallback={null}>
