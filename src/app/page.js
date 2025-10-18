@@ -107,7 +107,7 @@ export default function Home() {
           >
             <StarsCanvas/>
             <div 
-              className="center-content w-[700px] h-[700px] max-w-[90vw] max-h-[90vw] rounded-full flex flex-col items-center justify-center text-white text-center p-[35px] box-border transition-transform duration-300 relative"
+              className="center-content w-[700px] h-[700px] max-w-[90vw] max-h-[90vw] rounded-full flex flex-col items-center justify-center text-white text-center p-[35px] box-border transition-transform duration-300 relative bg-black" 
               style={{
                 boxShadow: 'inset -20px -20px 50px rgba(13, 0, 129, 0.4), inset 20px 20px 50px rgba(7, 0, 109, 0.43), 0 10px 30px rgb(255, 255, 255)'
               }}
@@ -125,8 +125,10 @@ export default function Home() {
                 <img 
                   src="/brandings/c5m-logo-center-bg-remove.png" 
                   alt="C5M" 
-                  className="responsive-img max-w-full h-auto block mx-auto"
+                  className="responsive-img h-auto block mx-auto mb-6"
+                  style={{ maxWidth: '60%' }} 
                 />
+
                 <p 
                   className="text-white mt-7 text-[clamp(1rem,2.5vw,1.25rem)]"
                   style={{

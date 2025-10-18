@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>C5M Globe</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <style>
+      html,body{height:100%;margin:0;background:#000;}
+      .wrap{height:100%;display:grid;place-items:center;}
+      canvas{border-radius:50%; box-shadow: inset 0 0 40px rgba(255,255,255,.12);}
+    </style>
+    <script src="https://unpkg.com/d3@7/dist/d3.min.js"></script>
+  </head>
+  <body>
+    <div class="wrap"><canvas id="globe" width="640" height="640"></canvas></div>
+    <script>
+      const canvas = document.getElementById("globe");
+      const ctx = canvas.getContext("2d");
+      const w = canvas.width, h = canvas.height;
+
+      const projection = d3.geoOrthographic()
+        .translate([w/2, h/2])
+        .scale((w/2)*0.92)
+        .clipAngle(90);
+
+      const path = d3.geoPath(projection, ctx);
+
+      const COLORS = {
+        "Europe":   "#8f5bd8",
+        "Asia":     "#8f5bd8",
+        "North America": "#f2a93b",
+        "South America": "#1f5fbf",
+        "Africa":   "#f06d6d",
+        "Oceania":  "#44c197",
+        "Antarctica": "#d9d9d9"
+      };
+
+      const OCEAN = "#cfe6ff";
+      const GLOW  = "rgba(255,255,255,0.18)";
+      let theta = 0, frame;
+
+      function glow(){
+        const r = (w/2)*0.97;
+        const grd = ctx.createRadialGradient(w/2,h/2,r*0.75, w/2,h/2,r);
+        grd.addColorStop(0,"rgba(255,255,255,0)");
+        grd.addColorStop(1,GLOW);
+        ctx.beginPath(); ctx.arc(w/2,h/2,r,0,Math.PI*2); ctx.fillStyle = grd; ctx.fill();
+      }
+      function ocean(){
+        ctx.beginPath(); path({type:"Sphere"});
+        ctx.fillStyle = OCEAN; ctx.fill();
+        ctx.lineWidth = 1.5; ctx.strokeStyle = "rgba(0,0,0,0.15)"; ctx.stroke();
+      }
+
+      fetch("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson")
+        .then(r=>r.json())
+        .then(geo=>{
+          const features = geo.features;
+          let t0 = performance.now();
+          (function loop(t){
+            const dt = t - t0; t0 = t;
+            theta = (theta + 6 * dt/1000) % 360; // 6 deg/sec
+            projection.rotate([theta, -10, 0]);
+
+            ctx.clearRect(0,0,w,h);
+            ctx.fillStyle = "#000"; ctx.fillRect(0,0,w,h);
+            glow(); ocean();
+
+            for(const f of features){
+              const cont = f.properties?.continent || "Other";
+              ctx.beginPath(); path(f);
+              ctx.fillStyle = COLORS[cont] || "#b77ad6";
+              ctx.fill();
+              ctx.lineWidth = .5; ctx.strokeStyle = "rgba(0,0,0,.2)"; ctx.stroke();
+            }
+            frame = requestAnimationFrame(loop);
+          })(t0);
+        });
+    </script>
+  </body>
+</html>
