@@ -5,6 +5,23 @@ import StarsCanvas from '@/components/NebulaBackground';
 import Image from 'next/image';
 import { useEffect } from 'react';
 
+import { Orbitron,Rajdhani, } from "next/font/google";
+
+const orbitron = Orbitron({
+  subsets: ["latin"],
+  weight: ["500", "700", "900"],
+  variable: "--font-orbitron",
+});
+
+
+const rajdhani = Rajdhani({
+  subsets: ["latin"],
+  weight: ["500", "700"],
+  variable: "--font-rajdhani",
+});
+
+
+
 export default function Home() {
   useEffect(() => {
     // Initialize AOS
@@ -119,23 +136,25 @@ export default function Home() {
               </div>
 
               {/* CONTENT OVERLAY */}
-              <div className="relative z-10">
-                <h3 className="welcome-text mb-5 text-white font-bold text-[clamp(1.8rem,4vw,3rem)]">
+             <div className="relative z-10">
+                <h3
+                  className={`${orbitron.className} glow-text text-black font-bold text-[clamp(1.8rem,4vw,3rem)] tracking-[-0.02em] mb-0.5`}
+                >
                   WELCOME TO
                 </h3>
+
                 <img 
                   src="/brandings/c5m-logo-center-bg-remove.png" 
                   alt="C5M" 
-                  className="responsive-img h-auto block mx-auto mb-6"
-                  style={{ maxWidth: '60%' }} 
+                  className="responsive-img h-auto block mx-auto mb-3"
+                  style={{ maxWidth: '75%' }} 
                 />
 
-                <p 
-                  className="text-white mt-7 text-[clamp(1rem,2.5vw,1.25rem)]"
+                <p
+                  className={`${orbitron.className} text-black mt-3 text-[clamp(1rem,2.5vw,1.25rem)]`}
                   style={{
-                    maxWidth: '75%',
-                    margin: '0 auto',
-                    textAlign: 'center',
+                    margin: "0 auto",
+                    textAlign: "center",
                   }}
                 >
                   Your digital world of entertainment, rewards, retail<br />
@@ -193,7 +212,7 @@ export default function Home() {
             className="cards-section py-20 px-10" 
             id="services"
             style={{
-              backgroundImage: "url('https://kurtzy.s3.ap-southeast-2.amazonaws.com/static/images/bg.png')",
+              backgroundImage: "url('/images/bg.png')",
               backgroundSize: 'cover',
               backgroundPosition: 'center'
             }}
@@ -204,7 +223,7 @@ export default function Home() {
                 <div className="card bg-white rounded-3xl shadow-[12px_12px_12px_rgb(58,2,94)] transition-transform duration-300 hover:-translate-y-[5px] flex flex-col items-center text-center p-0" id="publishing">
                   <h4 className="title text-[1.8219rem] font-bold my-[10px_0_5px] text-[rgb(251,156,17)]">PUBLISHING</h4>
                   <p className="description text-[1.8219rem] italic font-normal text-black">Decade 2 Publishing</p>
-                  <img src="https://kurtzy.s3.ap-southeast-2.amazonaws.com/static/images/d2plogonewest.png" alt="d2p" className="w-full max-w-[450px] h-auto block mx-auto object-contain" />
+                  <img src="/brandings/d2p_logo.jpeg" alt="d2p" className="w-full max-w-[450px] h-auto block mx-auto object-contain" />
                 </div>
               </a>
 
@@ -213,7 +232,7 @@ export default function Home() {
                 <div className="card bg-white rounded-3xl shadow-[12px_12px_12px_rgb(58,2,94)] transition-transform duration-300 hover:-translate-y-[5px] flex flex-col items-center text-center p-0" id="streaming">
                   <h4 className="title text-[1.8219rem] font-bold my-[10px_0_5px] text-[rgb(148,51,227)]">STREAMING SERVICE</h4>
                   <p className="description text-[1.8219rem] italic font-normal text-black">Galaxie Music</p>
-                  <img src="https://kurtzy.s3.ap-southeast-2.amazonaws.com/static/images/galaxie.jpg" alt="galaxie" className="w-full max-w-[450px] h-auto block mx-auto object-contain p-10 pt-0" />
+                  <img src="/brandings/galaxie.jpg" alt="galaxie" className="w-full max-w-[450px] h-auto block mx-auto object-contain p-10 pt-0" />
                 </div>
               </a>
 
@@ -222,7 +241,7 @@ export default function Home() {
                 <div className="card bg-white rounded-3xl shadow-[12px_12px_12px_rgb(58,2,94)] transition-transform duration-300 hover:-translate-y-[5px] flex flex-col items-center text-center p-0" id="games">
                   <h4 className="title text-[1.8219rem] font-bold my-[10px_0_5px] text-[rgb(240,0,50)]">MOBILE GAMING</h4>
                   <p className="description text-[1.8219rem] italic font-normal text-black">Titan Mobile Gaming</p>
-                  <img className="titan w-full max-w-[450px] h-auto block mx-auto object-contain pt-0 bg-white" src="https://kurtzy.s3.ap-southeast-2.amazonaws.com/static/images/newtitan.png" alt="titangaming" />
+                  <img className="titan w-full max-w-[450px] h-auto block mx-auto object-contain pt-0 bg-white" src="/brandings/newtitan.png" alt="titangaming" />
                 </div>
               </a>
 
@@ -231,7 +250,7 @@ export default function Home() {
                 <div className="card bg-white rounded-3xl shadow-[12px_12px_12px_rgb(58,2,94)] transition-transform duration-300 hover:-translate-y-[5px] flex flex-col items-center text-center p-0" id="music">
                   <h4 className="title text-[1.8219rem] font-bold my-[10px_0_5px] text-[rgb(244,76,185)]">MUSIC</h4>
                   <p className="description text-[1.8219rem] italic font-normal text-black">Impact Records</p>
-                  <img src="https://kurtzy.s3.ap-southeast-2.amazonaws.com/static/images/irnew.png" alt="records" className="w-full max-w-[450px] h-[280px] block mx-auto object-contain" />
+                  <img src="/brandings/irnew.png" alt="records" className="w-full max-w-[450px] h-[280px] block mx-auto object-contain" />
                 </div>
               </a>
 
@@ -249,7 +268,7 @@ export default function Home() {
                 <div className="card bg-white rounded-3xl shadow-[12px_12px_12px_rgb(58,2,94)] transition-transform duration-300 hover:-translate-y-[5px] flex flex-col items-center text-center p-0" id="interactivity">
                   <h4 className="title text-[1.8219rem] font-bold my-[10px_0_5px] text-[rgb(239,110,120)]">INTERACTIVITY</h4>
                   <p className="description text-[1.8219rem] italic font-normal text-black">eksplode!</p>
-                  <img src="https://kurtzy.s3.ap-southeast-2.amazonaws.com/static/images/eksplode.png" alt="eksplode" className="w-full max-w-[450px] h-auto block mx-auto object-contain" />
+                  <img src="brandings/eksplode.png" alt="eksplode" className="w-full max-w-[450px] h-auto block mx-auto object-contain" />
                 </div>
               </a>
 
@@ -258,7 +277,7 @@ export default function Home() {
                 <div className="card bg-white rounded-3xl shadow-[12px_12px_12px_rgb(58,2,94)] transition-transform duration-300 hover:-translate-y-[5px] flex flex-col items-center text-center p-0" id="video_production">
                   <h4 className="title text-[1.8219rem] font-bold my-[10px_0_5px] text-[rgb(21,98,189)]">VIDEO PRODUCTION</h4>
                   <p className="description text-[1.8219rem] italic font-normal text-black">Counterstrike Entertainment</p>
-                  <img src="https://kurtzy.s3.ap-southeast-2.amazonaws.com/static/images/strikenew.png" alt="strike" className="w-full max-w-[450px] h-auto block mx-auto object-contain" />
+                  <img src="/brandings/counter-strike-logo.jpeg" alt="strike" className="w-full max-w-[450px] h-auto block mx-auto object-contain" />
                 </div>
               </a>
 
@@ -267,7 +286,7 @@ export default function Home() {
                 <div className="card bg-white rounded-3xl shadow-[12px_12px_12px_rgb(58,2,94)] transition-transform duration-300 hover:-translate-y-[5px] flex flex-col items-center text-center p-0" id="green_initiatives">
                   <h4 className="title text-[1.8219rem] font-bold my-[10px_0_5px] text-[rgb(0,168,89)]">CREDIT EXCHANGE</h4>
                   <p className="description text-[1.8219rem] italic font-normal text-black">Green Genie</p>
-                  <img src="https://kurtzy.s3.ap-southeast-2.amazonaws.com/static/images/greengenie.png" alt="greengenie" className="w-full max-w-[450px] h-auto block mx-auto object-contain" />
+                  <img src="/brandings/greengenie.png" alt="greengenie" className="w-full max-w-[450px] h-auto block mx-auto object-contain" />
                 </div>
               </a>
 
@@ -276,7 +295,7 @@ export default function Home() {
                 <div className="card bg-white rounded-3xl shadow-[12px_12px_12px_rgb(58,2,94)] transition-transform duration-300 hover:-translate-y-[5px] flex flex-col items-center text-center p-0" id="payment_app">
                   <h4 className="title text-[1.8219rem] font-bold my-[10px_0_5px] text-[rgb(252,215,57)]">PAYMENT APP</h4>
                   <p className="description text-[1.8219rem] italic font-normal text-black">eMoney</p>
-                  <img src="https://kurtzy.s3.ap-southeast-2.amazonaws.com/static/images/eMoneyGold.png" alt="eMoney" className="w-full max-w-[450px] h-auto block mx-auto object-contain" />
+                  <img src="/brandings/eMoneyGold.png" alt="eMoney" className="w-full max-w-[450px] h-auto block mx-auto object-contain" />
                 </div>
               </a>
             </div>
@@ -305,7 +324,7 @@ export default function Home() {
                     </svg>
                   </div>
                   <h4 className="text-[#c41811] font-bold text-2xl mb-2">Write To Us</h4>
-                  <p className="text-[#c41811] text-lg">admin@continent5media.com</p>
+                  <p className="text-[#c41811] text-lg">info@decade2publishing.com</p>
                 </div>
               </a>
             </div>

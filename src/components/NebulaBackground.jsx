@@ -2,28 +2,39 @@
 
 import React, { useState, useRef, Suspense, useEffect } from "react";
 
-// CSS Fallback Stars
 const CSSStarsFallback = () => {
   const [stars, setStars] = useState([]);
 
   useEffect(() => {
-    const generatedStars = Array.from({ length: 300 }, (_, i) => ({
+    const generatedStars = Array.from({ length: 400 }, (_, i) => ({
       id: i,
       left: Math.random() * 100,
       top: Math.random() * 100,
-      size: Math.random() * 2 + 0.5,
-      opacity: Math.random() * 0.7 + 0.3,
-      animationDelay: Math.random() * 3,
-      animationDuration: Math.random() * 2 + 2,
+      size: Math.random() * 3 + 2, // 2px to 5px for more presence
+      opacity: Math.random() * 0.6 + 0.4,
+      animationDelay: Math.random() * 4,
+      animationDuration: Math.random() * 3 + 2,
+      color: getYellowVariation(),
     }));
     setStars(generatedStars);
   }, []);
+
+  const getYellowVariation = () => {
+    const whites = [
+      '#FFFFFF', // Pure white
+      '#F8F8FF', // Ghost white
+      '#FFFAFA', // Snow white
+      '#F5F5F5', // White smoke
+      '#FAFAFA', // Bright white
+    ];
+    return whites[Math.floor(Math.random() * whites.length)];
+  };
 
   return (
     <div 
       className="absolute inset-0 -z-10 pointer-events-none overflow-hidden"
       style={{ 
-        background: '#000000',
+        background: 'linear-gradient(to bottom, #000000, #0a0a00)',
         width: '100%',
         height: '100%',
       }}
@@ -37,18 +48,27 @@ const CSSStarsFallback = () => {
             top: `${star.top}%`,
             width: `${star.size}px`,
             height: `${star.size}px`,
-            backgroundColor: '#ffffff',
+            backgroundColor: star.color,
             opacity: star.opacity,
             animation: `twinkle ${star.animationDuration}s ease-in-out ${star.animationDelay}s infinite`,
-            boxShadow: `0 0 ${star.size * 2}px rgba(255, 255, 255, ${star.opacity})`,
+            boxShadow: `0 0 ${star.size * 4}px ${star.color}, 0 0 ${star.size * 8}px rgba(255, 255, 255, 0.8)`,
+            filter: 'brightness(1.5) saturate(1.3)',
           }}
         />
       ))}
       
       <style jsx>{`
         @keyframes twinkle {
-          0%, 100% { opacity: 0.3; transform: scale(1); }
-          50% { opacity: 1; transform: scale(1.2); }
+          0%, 100% { 
+            opacity: 0.5; 
+            transform: scale(1);
+            filter: brightness(1.3) saturate(1.3);
+          }
+          50% { 
+            opacity: 1; 
+            transform: scale(1.5);
+            filter: brightness(2) saturate(1.5);
+          }
         }
       `}</style>
     </div>
@@ -57,7 +77,7 @@ const CSSStarsFallback = () => {
 
 // Main component - try WebGL, fallback to CSS
 const StarsCanvas = () => {
-  const [renderMode, setRenderMode] = useState('loading'); // 'loading', 'webgl', 'css'
+  const [renderMode, setRenderMode] = useState('loading'); 
   const [Canvas, setCanvas] = useState(null);
   const [threeComponents, setThreeComponents] = useState(null);
 
@@ -83,13 +103,12 @@ const StarsCanvas = () => {
         // Dynamically import to catch any loading errors
         const { Canvas: CanvasComponent } = await import("@react-three/fiber");
         const { Points, PointMaterial, Preload } = await import("@react-three/drei");
-        const random = await import("maath/random/dist/maath-random.esm");
 
         console.log('✅ Three.js components loaded successfully');
 
         if (mounted) {
           setCanvas(() => CanvasComponent);
-          setThreeComponents({ Points, PointMaterial, Preload, random });
+          setThreeComponents({ Points, PointMaterial, Preload });
           setRenderMode('webgl');
         }
       } catch (error) {
@@ -133,18 +152,16 @@ const StarsCanvas = () => {
 
 // WebGL Stars Component
 const WebGLStars = ({ Canvas, components, onError }) => {
-  const { Points, PointMaterial, Preload, random } = components;
+  const { Points, PointMaterial, Preload } = components;
 
   const StarBackground = (props) => {
     const ref = useRef();
     
-    // Generate positions with complete validation
     const [sphere] = useState(() => {
-      const positions = new Float32Array(5000);
+      const positions = new Float32Array(6000); // More stars
       
-      // Generate sphere positions manually to avoid maath/random issues
-      for (let i = 0; i < 5000; i += 3) {
-        const radius = Math.random() * 2.0;
+      for (let i = 0; i < 6000; i += 3) {
+        const radius = Math.random() * 2.5; // Larger spread
         const theta = Math.random() * Math.PI * 2;
         const phi = Math.acos(2 * Math.random() - 1);
         
@@ -176,10 +193,14 @@ const WebGLStars = ({ Canvas, components, onError }) => {
         <Points ref={ref} positions={sphere} stride={3} frustumCulled {...props}>
           <PointMaterial
             transparent
-            color="#ffffff"
-            size={typeof window !== "undefined" && window.innerWidth < 768 ? 0.005 : 0.002}
+            color="#FFFFF" // Pure bright yellow
+            size={typeof window !== "undefined" && window.innerWidth < 768 ? 0.012 : 0.007} 
             sizeAttenuation
             depthWrite={false}
+            opacity={1}
+            emissive="#FFFF"
+            emissiveIntensity={1.2}
+            toneMapped={false}
           />
         </Points>
       </group>
@@ -189,13 +210,17 @@ const WebGLStars = ({ Canvas, components, onError }) => {
   return (
     <div
       className="absolute inset-0 -z-10 pointer-events-none"
-      style={{ width: "100%", height: "100%", background: "#000000" }}
+      style={{ 
+        width: "100%", 
+        height: "100%", 
+        background: "linear-gradient(to bottom, #000000, #0a0a00)" 
+      }}
     >
       <Canvas
         camera={{ position: [0, 0, 1] }}
-        dpr={[1, 1.5]}
+        dpr={[1, 2]}
         gl={{
-          antialias: false,
+          antialias: true,
           alpha: true,
           powerPreference: "high-performance",
           failIfMajorPerformanceCaveat: false,
